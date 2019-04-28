@@ -1,0 +1,35 @@
+dataSources:
+  ds_0: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo_ds?useUnicode=true&characterEncoding=utf-8&rewriteBatchedStatements=true&useSSL=false
+    username: root
+    password: 12345678
+#  ds_1: !!com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/demo_ds
+#    username: root
+#    password: 12345678
+
+shardingRule:
+  tables:
+    t_user:
+      actualDataNodes: ds_0.t_user_20190${3..6}
+      tableStrategy:
+        standard:
+          shardingColumn: c_date
+          preciseAlgorithmClassName: com.lan.sharding.demo.algorithm.SingleKeyDynamicDateForMonthTableShardingAlgorithm
+
+
+#    ts_order:
+#      actualDataNodes: ds_0.ts_order_000${0..1},ds_1.ts_order_000${2..3}
+#      databaseStrategy:
+#        inline:
+#          shardingColumn: id
+#          algorithmExpression: ds_${new BigDecimal(id).abs().divideAndRemainder(4)[1].longValue().intdiv(2)}
+#      tableStrategy:
+#        inline:
+#          shardingColumn: id
+#          algorithmExpression: ts_order_${String.format("%04d",new BigDecimal(id).abs().divideAndRemainder(4)[1].longValue())}
+
+props:
+  sql.show: true
