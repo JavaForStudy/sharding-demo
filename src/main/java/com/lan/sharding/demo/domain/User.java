@@ -12,7 +12,7 @@ import java.util.Date;
 @Accessors(chain = true)
 public class User {
     private String userName;
-    private Date date;
+    private Date pDate;
     private Long userId;
     private Date createTime;
 }

@@ -77,7 +77,7 @@ public class UserController {
         User user = new User()
                 .setCreateTime(new Date())
                 .setUserName("张三")
-                .setDate(date);
+                .setPDate(date);
 
         return userMapper.insert(user);
 
@@ -100,16 +100,16 @@ public class UserController {
         User user1 = new User()
                 .setCreateTime(new Date())
                 .setUserName("小红")
-                .setDate(date1);
+                .setPDate(date1);
 
         User user2 = new User()
                 .setCreateTime(new Date())
                 .setUserName("李四")
-                .setDate(date2);
+                .setPDate(date2);
         User user3 = new User()
                 .setCreateTime(new Date())
                 .setUserName("王五")
-                .setDate(date3);
+                .setPDate(date3);
         List<User> list = new ArrayList<>();
         list.add(user1);
         list.add(user2);
@@ -140,7 +140,7 @@ public class UserController {
 
         Date date = sdf.parse("2019-06-12");
 
-        User user = new User().setUserName("李四").setDate(date);
+        User user = new User().setUserName("李四").setPDate(date);
 
         return userMapper.insertForOnDuplicate(user);
     }

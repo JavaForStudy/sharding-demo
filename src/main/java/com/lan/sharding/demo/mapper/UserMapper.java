@@ -24,7 +24,7 @@ public interface UserMapper {
 
     @Select("select user_id as userId," +
             "user_name As userName," +
-            "c_date As date, " +
+            "c_date As pDate, " +
             "c_create_time as createTime " +
             "from t_user limit #{start}, #{pageSize}")
     List<User> selectForLimit(Query query);
@@ -32,26 +32,26 @@ public interface UserMapper {
     @Select("select count(1) from t_user")
     Integer selectCount();
 
-    @Insert("insert into t_user(user_name,c_date) value (#{userName},#{date})")
+    @Insert("insert into t_user(user_name,c_date) value (#{userName},#{pDate})")
     int insert(User user);
 
 
     @Insert("<script>" +
             "insert into t_user(user_name,c_date) values" +
             "<foreach collection='userList' item='item' index='index' separator=','>" +
-            "(#{item.userName},#{item.date})" +
+            "(#{item.userName},#{item.pDate})" +
             "</foreach>" +
             "</script>")
     int insertBatch(@Param("userList") List<User> userList);
 
     @Select("select user_id as userId," +
             "user_name As userName," +
-            "c_date As date, " +
+            "c_date As pDate, " +
             "c_create_time as createTime " +
             "from t_user " +
             "where user_name in ('小红','张三')")
     List<User> selectForIn();
 
-    @Insert("insert into t_user (user_name, c_date) value (#{userName}, #{date}) on duplicate key update c_create_time = now()")
+    @Insert("insert into t_user (user_name, c_date) value (#{userName}, #{pDate}) on duplicate key update c_create_time = now()")
     int insertForOnDuplicate(User user);
 }
