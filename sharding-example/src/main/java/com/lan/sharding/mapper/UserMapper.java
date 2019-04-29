@@ -54,4 +54,13 @@ public interface UserMapper {
 
     @Insert("insert into t_user (user_name, c_date) value (#{userName}, #{pDate}) on duplicate key update c_create_time = now()")
     int insertForOnDuplicate(User user);
+
+
+    @Select("select user_id as userId," +
+            "user_name As userName," +
+            "c_date As pDate, " +
+            "c_create_time as createTime " +
+            "from t_user ")
+    List<User> selectAll();
+
 }

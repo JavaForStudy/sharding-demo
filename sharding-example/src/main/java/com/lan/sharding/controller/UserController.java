@@ -144,5 +144,11 @@ public class UserController {
         return userMapper.insertForOnDuplicate(user);
     }
 
+    @RequestMapping("/selectAll")
+    public Object selectAll() {
+        return userMapper.selectAll();
+    }
+
+
 
 }
